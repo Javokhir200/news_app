@@ -10,9 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SectionsDto {
+public class SectionDto {
     private Integer id;
     private String name;
     private String text;
-    private AttachmentsDto attachments;
+    private AttachmentDto attachments;
 }

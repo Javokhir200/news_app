@@ -10,10 +10,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CommentsDto {
+public class CommentDto {
     private Integer id;
     private String text;
-    private PostsDto post;
-    private UsersDto from;
+    private PostDto post;
+    private UserDto from;
     private String to;
 }

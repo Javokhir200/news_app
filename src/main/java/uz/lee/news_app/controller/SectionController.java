@@ -1,9 +1,8 @@
 package uz.lee.news_app.controller;
 
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.news_app.dto.SectionsDto;
+import uz.lee.news_app.dto.SectionDto;
 import uz.lee.news_app.service.SectionService;
 
 @RestController
@@ -15,7 +14,7 @@ public class SectionController {
         this.service = service;
     }
     @PostMapping("/save")
-    public ResponseEntity<?> create(@RequestBody SectionsDto dto) {
+    public ResponseEntity<?> create(@RequestBody SectionDto dto) {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/{id}")

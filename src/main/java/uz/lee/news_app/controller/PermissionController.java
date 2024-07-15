@@ -2,7 +2,7 @@ package uz.lee.news_app.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.news_app.dto.PermissionsDto;
+import uz.lee.news_app.dto.PermissionDto;
 import uz.lee.news_app.service.PermissionService;
 
 @RestController
@@ -14,7 +14,7 @@ public class PermissionController {
         this.service = service;
     }
     @PostMapping("/save")
-    public ResponseEntity<?> create(@RequestBody PermissionsDto dto) {
+    public ResponseEntity<?> create(@RequestBody PermissionDto dto) {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/{id}")

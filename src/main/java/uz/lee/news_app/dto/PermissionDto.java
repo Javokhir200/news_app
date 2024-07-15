@@ -2,18 +2,16 @@ package uz.lee.news_app.dto;
 
 import lombok.*;
 
-import java.io.Serializable;
-
 /**
- * DTO for {@link uz.lee.news_app.domain.Occupations}
+ * DTO for {@link uz.lee.news_app.domain.Permissions}
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OccupationsDto {
+public class PermissionDto {
     private Integer id;
     private String name;
-    private String color;
+    private RoleDto role;
 }

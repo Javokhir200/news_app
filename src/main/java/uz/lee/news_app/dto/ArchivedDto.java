@@ -12,6 +12,6 @@ import lombok.*;
 @Builder
 public class ArchivedDto {
     private Integer id;
-    private UsersDto user;
-    private PostsDto post;
+    private UserDto user;
+    private PostDto post;
 }

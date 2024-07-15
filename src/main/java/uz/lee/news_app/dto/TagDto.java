@@ -3,15 +3,15 @@ package uz.lee.news_app.dto;
 import lombok.*;
 
 /**
- * DTO for {@link uz.lee.news_app.domain.Views}
+ * DTO for {@link uz.lee.news_app.domain.Tags}
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ViewsDto {
+public class TagDto {
     private Integer id;
-    private PostsDto post;
-    private int count;
+    private String name;
+    private PostDto posts;
 }

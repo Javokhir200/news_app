@@ -2,7 +2,7 @@ package uz.lee.news_app.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.news_app.dto.ViewsDto;
+import uz.lee.news_app.dto.ViewDto;
 import uz.lee.news_app.service.ViewService;
 
 @RestController
@@ -14,7 +14,7 @@ public class ViewController {
         this.service = service;
     }
     @PostMapping("/save")
-    public ResponseEntity<?> create(@RequestBody ViewsDto dto) {
+    public ResponseEntity<?> create(@RequestBody ViewDto dto) {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/{id}")

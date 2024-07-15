@@ -2,8 +2,6 @@ package uz.lee.news_app.dto;
 
 import lombok.*;
 
-import java.io.Serializable;
-
 /**
  * DTO for {@link uz.lee.news_app.domain.Likes}
  */
@@ -12,8 +10,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class LikesDto {
+public class LikeDto {
     private Integer id;
-    private PostsDto posts;
-    private UsersDto user;
+    private PostDto posts;
+    private UserDto user;
 }

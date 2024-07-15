@@ -2,8 +2,6 @@ package uz.lee.news_app.dto;
 
 import lombok.*;
 
-import java.io.Serializable;
-
 /**
  * DTO for {@link uz.lee.news_app.domain.Attachments}
  */
@@ -12,7 +10,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AttachmentsDto {
+public class AttachmentDto {
     private Integer id;
     private String originalName;
     private String submittedName;

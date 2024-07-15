@@ -10,8 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FollowsDto {
+public class FollowDto {
     private Long id;
-    private UsersDto follows;
-    private UsersDto writer;
+    private UserDto follows;
+    private UserDto writer;
 }

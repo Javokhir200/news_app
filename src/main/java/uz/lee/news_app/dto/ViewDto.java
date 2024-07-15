@@ -3,15 +3,15 @@ package uz.lee.news_app.dto;
 import lombok.*;
 
 /**
- * DTO for {@link uz.lee.news_app.domain.Permissions}
+ * DTO for {@link uz.lee.news_app.domain.Views}
  */
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PermissionsDto {
+public class ViewDto {
     private Integer id;
-    private String name;
-    private RolesDto role;
+    private PostDto post;
+    private int count;
 }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import uz.lee.news_app.dto.SharesDto;
+import uz.lee.news_app.dto.ShareDto;
 import uz.lee.news_app.service.ShareService;
 
 @RestController
@@ -17,7 +17,7 @@ public class ShareController {
         this.service = service;
     }
     @PostMapping("/save")
-    public ResponseEntity<?> create(@RequestBody SharesDto dto) {
+    public ResponseEntity<?> create(@RequestBody ShareDto dto) {
         return ResponseEntity.ok().build();
     }
 }

@@ -2,7 +2,7 @@ package uz.lee.news_app.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.news_app.dto.CommentsDto;
+import uz.lee.news_app.dto.CommentDto;
 import uz.lee.news_app.service.CommentService;
 
 @RestController
@@ -14,7 +14,7 @@ public class CommentController {
         this.service = service;
     }
     @PostMapping("/save")
-    public ResponseEntity<?> create(@RequestBody CommentsDto dto) {
+    public ResponseEntity<?> create(@RequestBody CommentDto dto) {
         return ResponseEntity.ok().build();
     }
     @GetMapping("/{id}")

@@ -2,7 +2,6 @@ package uz.lee.news_app.dto;
 
 import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -13,12 +12,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PostsDto {
+public class PostDto {
     private Long id;
     private String title;
-    private AttachmentsDto images;
+    private AttachmentDto images;
     private String content;
     private LocalDateTime createdAt;
-    private UsersDto writer;
+    private UserDto writer;
     private Sub_CategoryDto subCategory;
 }
