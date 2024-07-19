@@ -29,4 +29,7 @@ public class Posts {
     private Users writer;
     @ManyToOne(fetch = FetchType.LAZY)
     private Sub_Category subCategory;
+    private Integer shareCount;
+    private Integer likeCount;
+    private Integer viewCount;
 }
