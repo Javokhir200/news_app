@@ -2,7 +2,6 @@ package uz.lee.news_app.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.news_app.dto.TagDto;
 import uz.lee.news_app.service.TagService;
 
 @RestController
@@ -13,12 +12,8 @@ public class TagController {
     public TagController(TagService service) {
         this.service = service;
     }
-    @PostMapping("/save")
-    public ResponseEntity<?> create(@RequestBody TagDto dto) {
-        return ResponseEntity.ok().build();
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
+    @GetMapping()
+    public ResponseEntity<?> getAll() {
         return ResponseEntity.ok().build();
     }
  }
