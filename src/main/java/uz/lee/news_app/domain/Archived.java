@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import uz.lee.news_app.post.Posts;
+import uz.lee.news_app.user.Users;
 
 @Entity
 @Getter

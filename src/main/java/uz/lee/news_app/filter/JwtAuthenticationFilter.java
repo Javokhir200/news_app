@@ -44,7 +44,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         var claims = jwtProvider.parseClaims(token);
-        var email = claims.get("email", String.class);
         var username = claims.get("username", String.class);
         var roles = claims.get("role", String.class).split(",");
         var authorities = Arrays.stream(roles)

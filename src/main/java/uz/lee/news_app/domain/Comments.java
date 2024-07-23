@@ -1,10 +1,9 @@
 package uz.lee.news_app.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import uz.lee.news_app.post.Posts;
+import uz.lee.news_app.user.Users;
 
 @Entity
 @Getter
@@ -20,7 +19,7 @@ public class Comments {
     @ManyToOne(fetch = FetchType.LAZY)
     private Posts post;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Users from;
-    private String to;
+    private Users fromUser;
+    private String toUser;
     private String rate;
 }
