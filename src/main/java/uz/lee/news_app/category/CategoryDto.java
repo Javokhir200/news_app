@@ -1,7 +1,6 @@
 package uz.lee.news_app.category;
 
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter

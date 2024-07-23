@@ -1,7 +1,6 @@
 package uz.lee.news_app.user;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import uz.lee.news_app.dto.ApiResponse;
 import uz.lee.news_app.exceptions.ForbiddenException;

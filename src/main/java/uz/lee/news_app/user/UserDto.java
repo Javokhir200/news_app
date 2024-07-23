@@ -1,7 +1,6 @@
 package uz.lee.news_app.user;
 
 import lombok.*;
-import uz.lee.news_app.occupation.OccupationDto;
 
 /**
  * DTO for {@link Users}
