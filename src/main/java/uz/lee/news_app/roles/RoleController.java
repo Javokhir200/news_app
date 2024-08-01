@@ -17,13 +17,14 @@ public class RoleController {
         this.service = service;
     }
 
+    @CheckPermissions(permission = "CAN_GET_ROLES")
     @GetMapping
     public ResponseEntity<?> getAllRoles(){
         List<Roles> roles = service.getAllRoles();
         return ResponseEntity.ok(roles);
     }
 
-    @CheckPermissions(permission = "CAN_GET_ROLE_BY_ID")
+    @CheckPermissions(permission = "CAN_GET_ROLE")
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoleById(@PathVariable Integer id){
         Roles roles = service.getRoleById(id);
@@ -37,14 +38,14 @@ public class RoleController {
         return ResponseEntity.ok(resp);
     }
 
-    @CheckPermissions(permission = "CAN_EDIT_ROLE_BY_ID")
+    @CheckPermissions(permission = "CAN_EDIT_ROLE")
     @PutMapping("/{id}")
     public ResponseEntity<?> editRoleById(@PathVariable Integer id,@RequestBody RoleDto roleDto){
         ApiResponse resp = service.editRoleById(id,roleDto);
         return ResponseEntity.ok(resp);
     }
 
-    @CheckPermissions(permission = "CAN_DELETE_ROLE_BY_ID")
+    @CheckPermissions(permission = "CAN_DELETE_ROLE")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id){
         ApiResponse resp = service.deleteById(id);

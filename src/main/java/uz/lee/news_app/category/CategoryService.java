@@ -25,8 +25,6 @@ public class CategoryService {
         if (b){
             throw new SourceAlreadyExistException("Category exists with name = " + dto.getName());
         }
-
-
         Category category = new Category();
         category.setName(dto.getName());
         String attachmentUrl = dto.getAttachmentUrl();

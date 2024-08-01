@@ -18,6 +18,20 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private final String[] FOR_ALL = {
+            "/api/auth/login",
+            "/api/auth/register",
+            "/api/auth/verify/**",
+            "/api/users/get-followers",
+            "/api/users/get-followings",
+            "/api/comment",
+            "/api/posts/get-by-username",
+            "/api/posts/get-by-tag-name",
+            "/api/posts/get-by-id",
+            "api/comment/",
+
+    };
+
     public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
@@ -28,7 +42,10 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req -> req.anyRequest().permitAll()
+                        req -> req.requestMatchers(
+                                FOR_ALL
+                                        ).permitAll()
+                                .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

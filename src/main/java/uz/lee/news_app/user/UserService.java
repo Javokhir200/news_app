@@ -45,12 +45,7 @@ public class UserService {
 
     @Transactional
     public ApiResponse unfollowUser(String username, String ownerUsername) {
-        Users user = usersRepository.findByUsername(username).orElseThrow();
-        Users followUser = usersRepository.findByUsername(ownerUsername).orElseThrow();
-
         Boolean b = followsRepository.deleteByFollowerUsernameAndFollowingUsername(username, ownerUsername);
-        usersRepository.save(user);
-
         return b? new ApiResponse("Unfollowed !",true):new ApiResponse("Failed",false);
     }
 
@@ -97,7 +92,6 @@ public class UserService {
 
     private UserResponseDto getUserResponseDto(String username) {
         Users users = usersRepository.findByUsername(username).orElseThrow(() -> new SourceIsNotExistException("User is not exist with this username!"));
-
         UserResponseDto userResponseDto = new UserResponseDto();
         userResponseDto.setFullName(users.getFullName());
         userResponseDto.setUsername(users.getUsername());
@@ -105,6 +99,8 @@ public class UserService {
             Attachments attachments = users.getAttachments();
             userResponseDto.setAttachments(attachments);
         }
+        userResponseDto.setFollowersCount(followsRepository.countAllByFollowerUsername(username));
+        userResponseDto.setFollowingsCount(followsRepository.countAllByFollowingUsername(username));
         userResponseDto.setOccupation(occupationsRepository.findById(users.getOccupations().getId()).orElseThrow().getName());
         return userResponseDto;
     }

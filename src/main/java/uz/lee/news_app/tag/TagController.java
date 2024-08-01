@@ -10,12 +10,9 @@ import java.util.List;
 @RequestMapping("/api/tags")
 public class TagController {
     private final TagService service;
-
     public TagController(TagService service) {
         this.service = service;
     }
-
-    @CheckPermissions(permission = "CAN_GET_ALL_TAGS")
     @GetMapping()
     public ResponseEntity<?> getAll() {
         List<Tags> tags = service.getAll();

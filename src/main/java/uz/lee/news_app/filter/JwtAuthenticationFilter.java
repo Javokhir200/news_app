@@ -44,13 +44,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         var claims = jwtProvider.parseClaims(token);
-        var username = claims.get("username", String.class);
+        var id = claims.get("username", String.class);
         var roles = claims.get("role", String.class).split(",");
         var authorities = Arrays.stream(roles)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        var authentication = new UsernamePasswordAuthenticationToken(username,null, authorities);
+        var authentication = new UsernamePasswordAuthenticationToken(id,null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }

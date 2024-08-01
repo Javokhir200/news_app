@@ -22,15 +22,13 @@ public class CommentService {
         this.usersRepository = usersRepository;
     }
 
-    public ApiResponse saveComment(CommentDto dto) {
+    public ApiResponse saveComment(CommentDto dto,Long postId,Long toUserId,String fromUsername) {
         Comments comment = new Comments();
-        comment.setPost(postsRepository.getReferenceById(dto.getPostId()));
+        comment.setPost(postsRepository.getReferenceById(postId));
         comment.setRate(dto.getRate());
         comment.setText(dto.getText());
-        if (dto.getFromUserId()!=null)
-            comment.setFromUser(usersRepository.findById(dto.getFromUserId()).orElseThrow());
-        if (dto.getToUserId()!=null)
-            comment.setToUser(usersRepository.findById(dto.getToUserId()).orElseThrow());
+        comment.setFromUser(usersRepository.findByUsername(fromUsername).orElseThrow());
+        comment.setToUser(usersRepository.findById(toUserId).orElseThrow());
         commentsRepository.save(comment);
         return new ApiResponse("Comment saved",true);
     }

@@ -18,7 +18,6 @@ public class AttachmentController {
         this.attachmentService = attachmentService;
     }
 
-    @CheckPermissions(permission = "CAN_UPLOAD_ATTACHMENT")
     @PostMapping("/save-attachment")
     public ResponseEntity<?> saveAttachment(@RequestParam MultipartFile file){
         return ResponseEntity.ok("attachmentUrl= " + attachmentService.saveAttachment(file));
