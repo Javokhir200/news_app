@@ -1,11 +1,12 @@
 package uz.lee.news_app.roles;
 
 import org.springframework.stereotype.Service;
-import uz.lee.news_app.exceptions.SourceAlreadyExistException;
-import uz.lee.news_app.exceptions.SourceIsNotExistException;
+import uz.lee.news_app.custom_responses.ApiResponse;
+import uz.lee.news_app.custom_responses.exceptions.SourceAlreadyExistException;
+import uz.lee.news_app.custom_responses.exceptions.SourceIsNotExistException;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 
 @Service
 public class RoleService {
@@ -38,5 +39,25 @@ public class RoleService {
         }
 
         throw new SourceIsNotExistException("Role is not exist with id= " + id);
+    }
+
+    public ApiResponse editRoleById(Integer id, RoleDto roleDto) {
+        Roles role = rolesRepository.findById(id).orElseThrow(() -> new SourceIsNotExistException("Role is not present id=" + id));
+        if (roleDto.getName()!=null){
+            role.setName(roleDto.getName());
+        }
+        if (roleDto.getPermissions() != null)
+        {
+            role.setPermissions(roleDto.getPermissions());
+        }
+        rolesRepository.save(role);
+
+        return new ApiResponse("Role saved successfully id=" + id,true);
+    }
+
+    public ApiResponse deleteById(Integer id) {
+        rolesRepository.deleteById(id);
+
+        return new ApiResponse("Role deleted successfully id="+id,true);
     }
 }

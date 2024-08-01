@@ -1,13 +1,11 @@
 package uz.lee.news_app.post;
 
 import lombok.*;
-import uz.lee.news_app.attachment.AttachmentRequestDto;
-import uz.lee.news_app.attachment.AttachmentResponseDto;
-import uz.lee.news_app.tag.TagDto;
-import uz.lee.news_app.user.UserDto;
+import uz.lee.news_app.attachment.dto.AttachmentDto;
+import uz.lee.news_app.tag.Tags;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 /**
  * DTO for {@link Posts}
@@ -20,8 +18,9 @@ import java.util.List;
 public class PostDto {
     private Long id;
     private String title;
+
     private String content;
-    private List<AttachmentRequestDto> attachments;
-    private List<TagDto> tags;
+    private List<AttachmentDto> attachments;
+    private Set<Tags> tags;
     private Long writerId;
 }

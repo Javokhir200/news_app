@@ -1,7 +1,7 @@
 package uz.lee.news_app.occupation;
 
 import org.springframework.stereotype.Service;
-import uz.lee.news_app.exceptions.SourceAlreadyExistException;
+import uz.lee.news_app.custom_responses.exceptions.SourceAlreadyExistException;
 
 import java.util.List;
 

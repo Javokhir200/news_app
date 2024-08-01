@@ -13,14 +13,15 @@ public class OccupationController {
     public OccupationController(OccupationService service) {
         this.service = service;
     }
-    @PostMapping("/save")
+
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody OccupationDto dto) {
         String resp = service.addOccupation(dto);
         return ResponseEntity.ok(resp);
     }
-    @GetMapping()
+
+    @GetMapping
     public ResponseEntity<?> getAll() {
-        List<Occupations> resp = service.getAllOccupations();
-        return ResponseEntity.ok(resp);
+        return ResponseEntity.ok(service.getAllOccupations());
     }
 }

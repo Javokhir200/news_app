@@ -1,24 +1,23 @@
-package uz.lee.news_app.controller;
+package uz.lee.news_app.comment;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.lee.news_app.dto.CommentDto;
-import uz.lee.news_app.service.CommentService;
+
 
 @RestController
-@RequestMapping("api/comment")
+@RequestMapping("/api/comment")
 public class CommentController {
     private final CommentService service;
 
     public CommentController(CommentService service) {
         this.service = service;
     }
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody CommentDto dto) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(service.saveComment(dto));
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().build();
+    @GetMapping("/{postId}")
+    public ResponseEntity<?> getByPostId(@PathVariable Long postId) {
+        return ResponseEntity.ok(service.getCommentsByPostId(postId));
     }
 }

@@ -1,9 +1,8 @@
 package uz.lee.news_app.roles;
 
 import lombok.*;
-import uz.lee.news_app.roles.enums.Permission;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,5 +12,5 @@ import java.util.List;
 public class RoleDto {
    private Integer id;
    private String name;
-   private List<Permission> permissions;
+   private Set<Permission> permissions;
 }

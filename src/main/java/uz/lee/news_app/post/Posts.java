@@ -26,14 +26,15 @@ public class Posts {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Attachments> attachments;
     private String content;
+    @OneToOne
+    private Attachments mainAttachment;
     @CreationTimestamp
     private LocalDateTime createdAt;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Users writer;
-
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    private Set<Tags> tags = new HashSet<>();
+    @OneToMany(cascade = {CascadeType.MERGE})
+    private Set<Tags> tags;
 }

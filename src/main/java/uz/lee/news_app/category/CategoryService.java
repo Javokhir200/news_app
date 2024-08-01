@@ -1,14 +1,13 @@
 package uz.lee.news_app.category;
 
 import org.springframework.stereotype.Service;
-import uz.lee.news_app.attachment.AttachmentRepository;
 import uz.lee.news_app.attachment.AttachmentService;
-import uz.lee.news_app.exceptions.SourceAlreadyExistException;
-import uz.lee.news_app.exceptions.SourceIsNotExistException;
+import uz.lee.news_app.custom_responses.ApiResponse;
+import uz.lee.news_app.custom_responses.exceptions.ForbiddenException;
+import uz.lee.news_app.custom_responses.exceptions.SourceAlreadyExistException;
+import uz.lee.news_app.custom_responses.exceptions.SourceIsNotExistException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -50,7 +49,7 @@ public class CategoryService {
             Category child = categoryRepository.save(
                     Category.builder().name(dto.getName()).attachment(attachmentService.getAttachmentByUrl(attachmentUrl)).build());
             Category category = byId.get();
-            List<Category> children = category.getChildren();
+            Set<Category> children = category.getChildren();
             children.add(child);
             category.setChildren(children);
             categoryRepository.save(category);
@@ -60,7 +59,62 @@ public class CategoryService {
         throw new SourceIsNotExistException("Parent category is not exist id = " + parentId);
     }
 
-    public List<Category> getCategoriesByParentId(Integer parentId) {
+    public Set<Category> getCategoriesByParentId(Integer parentId) {
         return categoryRepository.getCategoryById(parentId).orElseThrow(()-> new SourceIsNotExistException("Parent category is not exist id= "+ parentId)).getChildren();
+    }
+
+    public ApiResponse deleteChildById(Integer childId) {
+        if (categoryRepository.isParent(childId)||!categoryRepository.existsById(childId)){
+            throw new ForbiddenException("Child category is not exist id="+childId);
+        }
+        categoryRepository.deleteById(childId);
+        return new ApiResponse("Child category deleted!",true);
+    }
+
+    public ApiResponse deleteParentById(Integer parentId) {
+        if (!categoryRepository.isParent(parentId)||!categoryRepository.existsById(parentId)){
+            throw new ForbiddenException("Parent category is not exist id="+parentId);
+        }
+        try{
+            categoryRepository.deleteById(parentId);
+        }catch (Exception e){
+            throw new ForbiddenException("You can't delete this category because of relationships!");
+        }
+        return new ApiResponse("Parent category deleted!",true);
+    }
+
+    public ApiResponse editChildCategoryById(Integer categoryId, CategoryDto categoryDto) {
+        if (categoryRepository.isParent(categoryId)||!categoryRepository.existsById(categoryId)){
+            throw new ForbiddenException("Child category is not exist id="+categoryId);
+        }
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new SourceIsNotExistException("Category is not exist by id = " + categoryId));
+        if (categoryDto.getName()!=null) {
+            category.setName(categoryDto.getName());
+        }
+
+        categoryRepository.save(category);
+        return new ApiResponse("Category updated!",true);
+    }
+
+    public ApiResponse editParentCategoryById(Integer categoryId, CategoryDto categoryDto) {
+        if (!categoryRepository.isParent(categoryId)||!categoryRepository.existsById(categoryId)){
+            throw new ForbiddenException("Parent category is not exist id="+categoryId);
+        }
+        Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new SourceIsNotExistException("Category is not exist by id = " + categoryId));
+        if (categoryDto.getName()!=null|| !Objects.equals(category.getName(), "")) {
+            category.setName(categoryDto.getName());
+        }
+        Set<Integer> setOfId = categoryDto.getChildrenId();
+        Set<Category> children = new HashSet<>();
+        setOfId.forEach(id->{
+            Optional<Category> opt = categoryRepository.getCategoryById(id);
+            if (categoryRepository.isParent(id)|| opt.isEmpty()){
+                throw new ForbiddenException("Child category is not exist id="+categoryId);
+            }
+            children.add(opt.get());
+        });
+        category.setChildren(children);
+        categoryRepository.save(category);
+        return new ApiResponse("Category updated!",true);
     }
 }

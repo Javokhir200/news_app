@@ -46,19 +46,6 @@ public class Users implements UserDetails {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_followers",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "follower_id")
-    )
-    private Set<Users> followers;
-
-    @ManyToMany(mappedBy = "followers")
-    private Set<Users> followings;
-
-
-
     private Boolean enabled = false;
 
     private Boolean accountNonExpired = true;

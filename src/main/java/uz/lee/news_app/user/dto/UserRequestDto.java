@@ -1,6 +1,7 @@
-package uz.lee.news_app.user;
+package uz.lee.news_app.user.dto;
 
 import lombok.*;
+import uz.lee.news_app.user.Users;
 
 /**
  * DTO for {@link Users}
@@ -10,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
+public class UserRequestDto {
     private Long id;
     private String fullName;
     private String email;
@@ -18,4 +19,6 @@ public class UserDto {
     private String password;
     private String attachmentUrl;
     private Long occupationId;
+    private Long followersCount;
+    private Long followingsCount;
 }

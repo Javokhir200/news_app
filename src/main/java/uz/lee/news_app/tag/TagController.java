@@ -2,6 +2,7 @@ package uz.lee.news_app.tag;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.lee.news_app.aop.CheckPermissions;
 
 import java.util.List;
 
@@ -13,6 +14,8 @@ public class TagController {
     public TagController(TagService service) {
         this.service = service;
     }
+
+    @CheckPermissions(permission = "CAN_GET_ALL_TAGS")
     @GetMapping()
     public ResponseEntity<?> getAll() {
         List<Tags> tags = service.getAll();

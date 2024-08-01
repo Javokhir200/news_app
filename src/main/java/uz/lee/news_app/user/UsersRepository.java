@@ -15,10 +15,5 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
 
     Optional<Users> findByUsername(String username);
     Optional<Users> findByUsernameAndPassword(String username, String password);
-
-    @Query("SELECT COUNT(f) FROM Users u JOIN u.followers f WHERE u.id = :id")
-    long countFollowersById(@Param("id") Long id);
-
-    @Query("SELECT COUNT(f) FROM Users u JOIN u.followings f WHERE u.id = :id")
-    long countFollowingsByById(@Param("id") Long id);
+    Boolean deleteByUsernameAndPassword(String username, String password);
 }

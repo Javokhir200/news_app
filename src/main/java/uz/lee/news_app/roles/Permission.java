@@ -1,4 +1,4 @@
-package uz.lee.news_app.roles.enums;
+package uz.lee.news_app.roles;
 
 public enum Permission {
     CAN_READ,

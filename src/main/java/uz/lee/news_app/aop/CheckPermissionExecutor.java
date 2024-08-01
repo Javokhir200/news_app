@@ -1,11 +1,10 @@
 package uz.lee.news_app.aop;
 
-import org.apache.catalina.User;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import uz.lee.news_app.exceptions.ForbiddenException;
+import uz.lee.news_app.custom_responses.exceptions.ForbiddenException;
 import uz.lee.news_app.user.Users;
 
 @Component

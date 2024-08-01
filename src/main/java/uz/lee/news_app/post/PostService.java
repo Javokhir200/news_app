@@ -3,13 +3,16 @@ package uz.lee.news_app.post;
 import org.springframework.stereotype.Service;
 import uz.lee.news_app.attachment.AttachmentRepository;
 import uz.lee.news_app.attachment.Attachments;
-import uz.lee.news_app.dto.ApiResponse;
-import uz.lee.news_app.exceptions.SourceIsNotExistException;
+import uz.lee.news_app.attachment.dto.AttachmentDto;
+import uz.lee.news_app.custom_responses.ApiResponse;
+import uz.lee.news_app.custom_responses.exceptions.ForbiddenException;
+import uz.lee.news_app.custom_responses.exceptions.SourceIsNotExistException;
 import uz.lee.news_app.tag.Tags;
 import uz.lee.news_app.tag.TagsRepository;
 import uz.lee.news_app.user.Users;
 import uz.lee.news_app.user.UsersRepository;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +42,7 @@ public class PostService {
         List<Attachments> attachments = new ArrayList<>();
         dto.getAttachments().forEach(a->{
             Attachments attachment = new Attachments();
-            attachment.setAttachmentUrl(a.getFileUrl());
+            attachment.setAttachmentUrl(a.getAttachmentUrl());
             attachment.setFileName(a.getFileName());
             attachmentRepository.save(attachment);
             attachments.add(attachment);
@@ -65,15 +68,64 @@ public class PostService {
         return new ApiResponse("Post saved!",true);
     }
 
-    public Posts getById(Long id) {
-        return postsRepository.findById(id).orElseThrow(() -> new SourceIsNotExistException("Post is not exist id=" + id));
+    public ShortPostsInfo getById(Long id) {
+        return postsRepository.findPostsById(id).orElseThrow(() -> new SourceIsNotExistException("Post is not exist id=" + id));
     }
 
-    public List<PostProjection> getByTagName(String tag) {
-        return postsRepository.getAllByTagName(tag);
+    public List<ShortPostsInfo> getByTagName(String tagName) {
+        return postsRepository.findAllByTagsNameContains(tagName);
     }
 
-    public List<PostProjection> getByWriterId(Long writeId) {
-        return postsRepository.getAllByWriteId(writeId);
+    public List<ShortPostsInfo> getByWriterUsername(String username) {
+        return postsRepository.findAllByWriterUsername(username);
+    }
+
+    public Object editByPostId(Long postId, PostEditDto postDto, Principal principal) {
+
+        if (!principal.getName().equals(postsRepository.getWriterUsernameByPostId(postId))){
+            throw new ForbiddenException("asdasdasd");
+        }
+
+        Posts post = postsRepository.findById(postId).orElseThrow(() -> new SourceIsNotExistException("Post is not exist id=" + postId));
+        Set<Long> tagIds = postDto.getTagIds();
+        Set<Tags> tags = new HashSet<>();
+
+        if (tagIds !=null){
+            tagIds.forEach(id->{
+                Tags tag = tagsRepository.findById(id).orElse(null);
+                tags.add(tag);
+            });
+            post.setTags(tags);
+        }
+
+        List<AttachmentDto> attachmentDtos = postDto.getAttachments();
+        List<Attachments> attachments = new ArrayList<>();
+        if (!attachmentDtos.isEmpty()){
+            postDto.getAttachments().forEach(a->{
+                Attachments attachment = new Attachments();
+                attachment.setAttachmentUrl(a.getAttachmentUrl());
+                attachment.setFileName(a.getFileName());
+                attachmentRepository.save(attachment);
+                attachments.add(attachment);
+            });
+            post.setAttachments( attachments);
+        }
+
+        if (post.getContent()!=null){
+            post.setContent(postDto.getContent());
+        }
+
+        if (post.getTitle()!=null){
+            post.setTitle(postDto.getTitle());
+        }
+
+        postsRepository.save(post);
+
+        return new ApiResponse("Post edited successfully!",true);
+    }
+
+    public ApiResponse deletePostById(Long postId) {
+     postsRepository.deleteById(postId);
+     return new ApiResponse("Post deleted successfully id="+postId,true);
     }
 }

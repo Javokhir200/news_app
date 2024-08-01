@@ -3,21 +3,20 @@ package uz.lee.news_app.post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
+@Repository
 public interface PostsRepository extends JpaRepository<Posts, Long> {
 
-    @Query("SELECT p.id AS id, p.content AS content, p.createdAt AS createdAt, p.title AS title, " +
-            "p.writer.id AS writerId, p.writer.username AS username, " +
-            "t.name AS tags, a.attachmentUrl AS attachments " +
-            "FROM Posts p " +
-            "JOIN p.tags t " +
-            "LEFT JOIN p.attachments a " +
-            "WHERE t.name = :tagName " +
-            "ORDER BY p.id ASC")
-    List<PostProjection> getAllByTagName(@Param("tagName") String tagName);
+    Optional<ShortPostsInfo> findPostsById(Long id);
 
-    @Query("select p.id as id,p.title as title,p.createdAt as createdAt " +
-            "from Posts p where p.writer.id = :writerId")
-    List<PostProjection> getAllByWriteId(@Param("writerId") Long writerId);
+    List<ShortPostsInfo> findAllByTagsNameContains(String tags_name);
+
+    List<ShortPostsInfo> findAllByWriterUsername(String writer_username);
+
+    @Query("select p.writer.username from Posts p where p.id =: postId")
+    String getWriterUsernameByPostId(@Param("postId") Long postId);
 }

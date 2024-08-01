@@ -1,4 +1,4 @@
-package uz.lee.news_app.exceptions;
+package uz.lee.news_app.custom_responses.exceptions;
 
 public class SourceIsNotExistException extends RuntimeException{
     public SourceIsNotExistException(String message) {

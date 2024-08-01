@@ -2,14 +2,10 @@ package uz.lee.news_app.auth;
 
 
 import lombok.SneakyThrows;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import uz.lee.news_app.dto.ApiResponse;
+import uz.lee.news_app.custom_responses.ApiResponse;
 import uz.lee.news_app.email.EmailService;
 import uz.lee.news_app.provider.JwtProvider;
 import uz.lee.news_app.user.Users;

@@ -1,11 +1,8 @@
 package uz.lee.news_app.auth;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import uz.lee.news_app.attachment.Attachments;
 
 @AllArgsConstructor
 @NoArgsConstructor
