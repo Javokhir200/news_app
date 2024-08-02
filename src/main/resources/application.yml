@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: news_app
+  datasource:
+    url: jdbc:postgresql://localhost:5432/website
+    username: nollon
+    password: 19792004
+    driverClassName: org.postgresql.Driver
+  jpa:
+#    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: javokhirganiboyev2004@gmail.com
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+  sql:
+    init:
+      mode: never
+server:
+  port:
+    8080
+#  error:
+#    include-binding-errors:
+#      always
+logging:
+  level:
+    org:
+      springframework=DEBUG: info
+jwt:
+  token:
+    expiration:
+      mills: 3_600_000_000
+    secret:
+      key: asdasdasdasdasdasdasdsdasdasdasdasdasdasd
