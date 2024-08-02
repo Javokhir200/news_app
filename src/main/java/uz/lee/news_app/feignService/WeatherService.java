@@ -7,16 +7,16 @@ import uz.lee.news_app.feignDtos.WeatherResponseDTO;
 
 @Service
 public class WeatherService {
-    private final WeatherClient weatherClient;
+    private final WeatherClient weatherclient;
 
     @Value("${openweathermap.api.key}")
     private String apiKey;
 
     public WeatherService(WeatherClient weatherClient) {
-        this.weatherClient = weatherClient;
+        this.weatherclient = weatherClient;
     }
 
     public WeatherResponseDTO get7DayWeather(double latitude, double longitude) {
-        return weatherClient.get7DayWeather(latitude, longitude, "minutely,hourly", apiKey);
+        return weatherclient.get7DayWeather(latitude, longitude, "minutely,hourly", apiKey);
     }
 }

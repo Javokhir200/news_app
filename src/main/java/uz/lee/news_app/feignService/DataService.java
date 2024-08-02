@@ -7,15 +7,15 @@ import uz.lee.news_app.feignDtos.APIResponseDTO;
 
 @Service
 public class DataService {
-    private final APIFeign aplClient;
+    private final APIFeign apiClient;
     private final WeatherClient weatherClient;
 
     public DataService(APIFeign aplClient, WeatherClient weatherClient) {
-        this.aplClient = aplClient;
+        this.apiClient = aplClient;
         this.weatherClient = weatherClient;
     }
 
     public APIResponseDTO getAPLData() {
-        return aplClient.getAPIData();
+        return apiClient.getAPIData();
     }
 }

@@ -8,4 +8,5 @@ import uz.lee.news_app.feignDtos.APIResponseDTO;
 public interface APIFeign {
     @GetMapping()
     APIResponseDTO getAPIData();
+
 }

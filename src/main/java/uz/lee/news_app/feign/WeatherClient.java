@@ -13,5 +13,6 @@ public interface WeatherClient {
         @RequestParam("lon") double longitude,
         @RequestParam("exclude") String exclude,
         @RequestParam("appid") String apiKey
+
     );
 }

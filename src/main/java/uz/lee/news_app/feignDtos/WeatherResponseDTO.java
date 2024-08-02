@@ -3,14 +3,14 @@ package uz.lee.news_app.feignDtos;
 import java.util.List;
 
 public class WeatherResponseDTO {
-    private List<DailyForecast> daily;
+    private List<DailyForecast> dailyForecasts;
 
-    public List<DailyForecast> getDaily() {
-        return daily;
+    public List<DailyForecast> getDailyForecasts() {
+        return dailyForecasts;
     }
 
-    public void setDaily(List<DailyForecast> daily) {
-        this.daily = daily;
+    public void setDailyForecasts(List<DailyForecast> dailyForecasts) {
+        this.dailyForecasts = dailyForecasts;
     }
 
     public static class DailyForecast {

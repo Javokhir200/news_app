@@ -10,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class APIResponseDTO {
-    // Define fields according to the API response
     private String field1;
     private int field2;
 }
